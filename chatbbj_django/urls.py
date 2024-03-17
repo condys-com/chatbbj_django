@@ -18,8 +18,14 @@ from django.contrib import admin
 from django.urls import path
 
 from chatbbj_app import views
+from chatbbj_app.views import CustomAuthToken, UserDetailView, UserRegistration, ChatHistoryView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/download/', views.download_file),
+    path('api/login/', CustomAuthToken.as_view()),
+    path('api/user/', UserDetailView.as_view()),
+    path('api/register/', UserRegistration.as_view()),
+    path('api/chathistory/', ChatHistoryView.as_view()),
+    path('api/messages/<str:username>/', views.get_chat_history, name='get_chat_history'),
 ]
